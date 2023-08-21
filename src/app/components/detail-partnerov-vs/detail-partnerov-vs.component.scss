@@ -1,0 +1,59 @@
+
+.button {
+    border: 2px solid #d2bdff;
+    height: 40px;
+    width: 250px;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+  
+    &::after {
+      content: "Spät na vyhľadávanie";
+      position: absolute;
+      left: 20%;
+      top: 25%;
+      color: #d2bdff;
+      transition: all 0.1s linear;
+    }
+  
+    &:hover {
+      &::after {   
+        text-shadow: 0 0 10px #9bc0f5, 0 0 10px #9bc0f5, 0 0 20px #9bc0f5,
+          0 0 30px #82bedc, 0 0 40px #82bedc, 0 0 50px #82bedc, 0 0 80px #82bedc;
+      }
+    }    
+}
+
+.button-show-expired {
+    &::after {
+        content: "Zobraziť po skončení platnosti";
+        left: 7%;
+        top: 25%;
+    }
+    &__hide{ 
+        &::after {
+            content: "Skryť po skončení platnosti";
+            left: 10%;
+        }
+    }
+}
+
+    table.table {
+        border: 1px solid #ffffff;
+        background-color:#d2bdff;
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+        color: #000000;
+    }
+    table.table td, table.table th {
+        border: 1px solid #FFFFFF;
+        padding: 3px 2px;
+    }
+    table.table tbody td {
+        font-size: 13px;
+    }
+    table.table tr:nth-child(even) {
+        background: #ffffff82;
+    }

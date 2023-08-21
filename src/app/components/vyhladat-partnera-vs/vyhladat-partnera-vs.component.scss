@@ -1,0 +1,159 @@
+.container {
+    justify-content: center;
+    display: flex;
+}
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+
+    
+  }
+  .form__field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #9b9b9b;
+    outline: 0;
+    font-size: 1.3rem;
+    color: #fff;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+  }
+  .form__field::placeholder {
+    color: transparent;
+  }
+  .form__field:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+  .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: #9b9b9b;
+  }
+  .form__field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image-slice: 1;
+  }
+  .form__field:focus ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .ng-touched.ng-valid  {
+    border-bottom: 2px solid #28db7c;
+  }
+  
+  .ng-invalid:not(form)  {
+    border-bottom: 2px solid #c02f2f;
+  }
+  
+  .alert div {
+    color: #820000;
+    margin-top: 2px;
+    margin-bottom: 5px;
+  }
+
+  .button {
+    border: 2px solid #d2bdff;
+    height: 40px;
+    width: 200px;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    margin: 25px;
+  
+    &::after {
+      content: "Vyhľadať";
+      position: absolute;
+      top: 27%;
+      left: 50%;
+      transform: translate(-50%);
+      color: #d2bdff;
+      transition: all 0.1s linear;
+    }
+  
+    &::before {
+      content: "";
+      position: relative;
+      display: block;
+      height: 15px;
+      width: 15px;
+      background: #d2bdff;
+      box-shadow: 0px 0px 10px 3px #0ff;
+      margin-left: -8px;
+      margin-top: -8px;
+      opacity: 0;
+      transition: all 0.1s linear;
+      border-radius: 100%;
+      animation: star 1.3s linear infinite;
+    }
+  
+    @keyframes star {
+      0% {
+        margin-left: -8px;
+        margin-top: -8px;
+      }
+      25% {
+        margin-left: 194px;
+        margin-top: -8px;
+      }
+  
+      50% {
+        margin-left: 194px;
+        margin-top: 35px;
+      }
+      75% {
+        margin-left: -8px;
+        margin-top: 35px;
+      }
+      100% {
+        margin-left: -8px;
+        margin-top: -8px;
+      }
+    }
+  
+      &:hover {
+        &::after {
+          
+          text-shadow: 0 0 10px #9bc0f5, 0 0 10px #9bc0f5, 0 0 20px #9bc0f5,
+            0 0 30px #82bedc, 0 0 40px #82bedc, 0 0 50px #82bedc, 0 0 60px #82bedc;
+        }
+      }
+
+    &__loading {
+      &::after {
+        content: "Hľadám...";
+      }
+      &::before {
+        opacity: 1;
+        animation: star 1.3s linear infinite;
+      }
+  
+      
+    }
+    
+  }
+  .isDisabled {
+    border: 2px solid #848484;
+    &::after { 
+      text-shadow: 0 0 10px #960606, 0 0 10px #960606, 0 0 20px #960606,
+      0 0 30px #960606, 0 0 40px #960606, 0 0 50px #960606, 0 0 60px #960606 !important;
+    }
+    
+  }
+  

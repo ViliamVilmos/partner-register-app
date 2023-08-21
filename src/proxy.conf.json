@@ -1,0 +1,9 @@
+{
+  "/api/*": {
+    "target": "https://rpvs.gov.sk/",
+    "secure": false,
+    "pathRewrite": { "^/api": "https://rpvs.gov.sk/OpenData" },
+    "change-origin": true,
+    "logLevel": "debug"
+  }
+}

@@ -1,0 +1,148 @@
+<div>
+  <div class="button" routerLink="/search" routerLinkActive="active" ariaCurrentWhenActive="page"></div>
+</div>
+<div *ngIf="partneriVerejnehoSektora$ | async">
+  <h2>Partneri Verejného Sektora</h2>
+  <div *ngFor="let partnerVS of partneriVerejnehoSektora$ | async">
+    <table *ngIf="partnerVS.platnostDo === null" class="table">
+      <tr *ngIf="partnerVS.formaOsoby !== 'PravnickaOsoba'">
+        <th>Meno a priezvisko</th>
+        <td>{{ partnerVS.titulPred }}{{ partnerVS.meno }} {{ partnerVS.priezvisko }}{{ partnerVS.titulZa }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.formaOsoby !== 'PravnickaOsoba'">
+        <th>Dátum narodenia</th>
+        <td>{{ partnerVS.datumNarodenia | date : "dd.MM.y" }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.formaOsoby === 'PravnickaOsoba'">
+        <th>Obchodné meno</th>
+        <td>{{ partnerVS.obchodneMeno }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.formaOsoby === 'PravnickaOsoba'">
+        <th>IČO</th>
+        <td>{{ partnerVS.ico }}</td>
+      </tr>
+      <tr>
+        <th>Forma osoby</th>
+        <td>{{ partnerVS.formaOsoby === "PravnickaOsoba" ? "Právnická Osoba" : "Fyzická Osoba" }}</td>
+      </tr>
+      <tr>
+        <th>Platnosť od</th>
+        <td>{{ partnerVS.platnostOd | date : "dd.MM.y" }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.platnostDo">
+        <th>Platnosť do</th>
+        <td>{{ partnerVS.platnostDo | date : "dd.MM.y" }}</td>
+      </tr>
+      <tr>
+        <th>Adresa</th>
+        <td>
+          {{ partnerVS.adresa.menoUlice }} {{ partnerVS.adresa.orientacneCislo }}, {{ partnerVS.adresa.mesto }},
+          {{ partnerVS.adresa.psc }}
+        </td>
+      </tr>
+      <tr>
+        <th>Štát</th>
+        <td>
+          {{ partnerVS.adresa.stat.meno }}
+        </td>
+      </tr>
+      <tr>
+        <th>Koneční Užívatelia Výhod</th>
+        <td>
+          <div *ngFor="let konecnyUV of partnerVS.partner.konecniUzivateliaVyhod">
+            <div *ngIf="konecnyUV.platnostDo === null">
+              <div *ngIf="!konecnyUV.jeVerejnyCinitel">
+                {{ konecnyUV.titulPred }}{{ konecnyUV.meno }} {{ konecnyUV.priezvisko }}{{ konecnyUV.titulZa }},
+                {{ konecnyUV.datumNarodenia | date : "dd.MM.y" }}
+              </div>
+              <div *ngIf="konecnyUV.jeVerejnyCinitel">{{ konecnyUV.obchodneMeno }}, {{ konecnyUV.ico }}</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br />
+  <h3 *ngIf="showExpiredData">Partneri Verejného Sektora s ukončenou platnosťou</h3>
+  <div *ngFor="let partnerVS of partneriVerejnehoSektora$ | async">
+    <table *ngIf="showExpiredData && partnerVS.platnostDo !== null" class="table">
+      <tr *ngIf="partnerVS.formaOsoby !== 'PravnickaOsoba'">
+        <th>Meno a priezvisko</th>
+        <td>{{ partnerVS.titulPred }}{{ partnerVS.meno }} {{ partnerVS.priezvisko }}{{ partnerVS.titulZa }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.formaOsoby !== 'PravnickaOsoba'">
+        <th>Dátum narodenia</th>
+        <td>{{ partnerVS.datumNarodenia | date : "dd.MM.y" }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.formaOsoby === 'PravnickaOsoba'">
+        <th>Obchodné meno</th>
+        <td>{{ partnerVS.obchodneMeno }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.formaOsoby === 'PravnickaOsoba'">
+        <th>IČO</th>
+        <td>{{ partnerVS.ico }}</td>
+      </tr>
+      <tr>
+        <th>Forma osoby</th>
+        <td>{{ partnerVS.formaOsoby === "PravnickaOsoba" ? "Právnická Osoba" : "Fyzická Osoba" }}</td>
+      </tr>
+      <tr>
+        <th>Platnosť od</th>
+        <td>{{ partnerVS.platnostOd | date : "dd.MM.y" }}</td>
+      </tr>
+      <tr *ngIf="partnerVS.platnostDo">
+        <th>Platnosť do</th>
+        <td>{{ partnerVS.platnostDo | date : "dd.MM.y" }}</td>
+      </tr>
+      <tr>
+        <th>Adresa</th>
+        <td>
+          {{ partnerVS.adresa.menoUlice }} {{ partnerVS.adresa.orientacneCislo }}, {{ partnerVS.adresa.mesto }},
+          {{ partnerVS.adresa.psc }}
+        </td>
+      </tr>
+      <tr>
+        <th>Štát</th>
+        <td>
+          {{ partnerVS.adresa.stat.meno }}
+        </td>
+      </tr>
+      <tr>
+        <th>Koneční Užívatelia Výhod</th>
+        <td>
+          <div *ngFor="let konecnyUV of partnerVS.partner.konecniUzivateliaVyhod; let i = index">
+            <div *ngIf="konecnyUV.platnostDo !== null">
+              <div *ngIf="!konecnyUV.jeVerejnyCinitel">
+                <hr *ngIf="i > 0" />
+                <div>
+                  {{ konecnyUV.titulPred }}{{ konecnyUV.meno }} {{ konecnyUV.priezvisko }}{{ konecnyUV.titulZa }},
+                  {{ konecnyUV.datumNarodenia | date : "dd.MM.y" }}
+                </div>
+                <div>
+                  <b>Platnosť: </b>od {{ konecnyUV.platnostOd | date : "dd.MM.y" }} do
+                  {{ konecnyUV.platnostDo | date : "dd.MM.y" }}
+                </div>
+              </div>
+              <div *ngIf="konecnyUV.jeVerejnyCinitel">
+                <div>{{ konecnyUV.obchodneMeno }}, {{ konecnyUV.ico }}</div>
+                <div>
+                  <b>Platnosť: </b>od {{ konecnyUV.platnostOd | date : "dd.MM.y" }} do
+                  {{ konecnyUV.platnostDo | date : "dd.MM.y" }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <br />
+  </div>
+  <div
+    class="button-show-expired button"
+    [ngClass]="showExpiredData ? 'button-show-expired__hide' : ''"
+    (click)="showExpiredData = !showExpiredData"
+  ></div>
+</div>
+<div *ngIf="!(partneriVerejnehoSektora$ | async)">
+  <h3>Žiadne výsledky. Budete presmerovaný na vyhľadávanie...</h3>
+</div>
