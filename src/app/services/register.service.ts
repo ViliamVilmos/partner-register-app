@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 import { PartnerVerejnehoSektora } from '../models/PartnerVerejnehoSektora';
 import { Observable, catchError, concatMap, map, reduce, retry, switchMap, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { KonecnyUzivatelVyhod } from '../models/KonecnyUzivatelVyhod';
 import { environment } from '../../environments/environment';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type, api_key, Authorization',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Credentials': 'true',
+  }),
+};
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +49,8 @@ export class RegisterService {
           this.PartneriVerejnehoSektora +
           `?$filter=Ico%20eq%20'` +
           ico +
-          `'&$expand=Adresa($expand=Stat)%2CPartner`
+          `'&$expand=Adresa($expand=Stat)%2CPartner`,
+        httpOptions
       )
       .pipe(
         retry(2),
@@ -92,7 +102,10 @@ export class RegisterService {
 
   private ziskajKonecnychUzivatelovVyhod(partnerId: number): Observable<KonecnyUzivatelVyhod[]> {
     return this.http
-      .get<KonecnyUzivatelVyhod[]>(this.API + this.Partneri + '(' + partnerId + ')?$expand=KonecniUzivateliaVyhod')
+      .get<KonecnyUzivatelVyhod[]>(
+        this.API + this.Partneri + '(' + partnerId + ')?$expand=KonecniUzivateliaVyhod',
+        httpOptions
+      )
       .pipe(
         catchError((err) => this.handleError(err)),
         map((response: any) => response.KonecniUzivateliaVyhod),

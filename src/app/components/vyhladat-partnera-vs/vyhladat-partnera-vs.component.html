@@ -4,7 +4,7 @@
     <input class="form__field" id="ico" type="text" [formControl]="ico" />
     <div *ngIf="ico.invalid && (ico.dirty || ico.touched)" class="alert alert-danger">
       <div *ngIf="ico.errors?.['required']">IČO musí byť vyplnené</div>
-      <!-- <div *ngIf="ico.errors?.['minlength']">Musí obsahovať aspon 8 číslic</div> -->
+      <div *ngIf="ico.errors?.['minlength']">Musí obsahovať aspon 8 číslic</div>
       <div *ngIf="ico.errors?.['pattern']">IČO nesmie obsahovať iné znaky ako čísla</div>
     </div>
     <div

@@ -19,7 +19,7 @@ export class VyhladatPartneraVSComponent {
     private store: Store<{ register: PartnerVerejnehoSektora[] }>
   ) {}
 
-  ico = new FormControl('36407275', [Validators.required, Validators.pattern('^[0-9 ]+')]);
+  ico = new FormControl('', [Validators.required, Validators.pattern('^[0-9 ]+'), Validators.minLength(8)]);
   loading = false;
 
   vyhladatPartnerovVS() {
